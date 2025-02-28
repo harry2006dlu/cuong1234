@@ -4,84 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mojito.com</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Menu -->
+<!-- Header với Logo và Menu -->
+<header>
+    <div class="logo">
+        <h1>Mojito</h1>
+    </div>
     <nav>
         <ul>
             <li><a href="#home">Trang Chủ</a></li>
             <li><a href="#products">Sản Phẩm</a></li>
-            <li><a href="#introduction">Giới Thiệu</a></li>
-            <li><a href="#contact">Liên Hệ</a></li>
+            <li><a href="#about">Giới Thiệu</a></li>
+            <li><a href="#cart">Giỏ Hàng</a></li>
         </ul>
     </nav>
+</header>
 
-    <!-- Phần Trang Chủ -->
-    <section id="home">
-        <h1>Chào Mừng Bạn Đến Với Mojito</h1>
-        <p>Khám phá các sản phẩm chất lượng nhất tại cửa hàng của chúng tôi!</p>
-    </section>
+<!-- Banner -->
+<section id="home">
+    <div class="banner">
+        <h2>Chào Mừng Bạn Đến Với Mojito</h2>
+        <p>Khám Phá Những Sản Phẩm Tuyệt Vời Nhất!</p>
+    </div>
+</section>
 
-    <!-- Phần Giới Thiệu -->
-    <section id="introduction">
-        <h2>Giới Thiệu Về Chúng Tôi</h2>
-        <img src="images/about-us.jpg" alt="Giới Thiệu Chúng Tôi">
-        <p>
-            Chào mừng bạn đến với Mojito!
-            Xin tự giới thiệu, tôi là Bảo Cương là CEO và Founder của Mojito, đây ngoài là nơi giao lưu cũng là nơi giúp các bạn giao lưu, học hỏi 
-            Chúng tôi chuyên cung cấp các sản phẩm chất lượng cao với giá cả hợp lý. 
-            Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.
-        </p>
-        <p>
-            Hãy khám phá và viết lên câu chuyện của mình để tận hưởng những trải nghiệm tuyệt vời nhất
-        </p>
-    </section>
+<!-- Phần Giới Thiệu -->
+<section id="about">
+    <h2>Giới Thiệu</h2>
+    <p>
+        Chào mừng bạn đến với Mojito!
+        Xin tự giới thiệu, tôi là Bảo Cương là CEO và Founder của Mojito, đây ngoài là nơi giao lưu cũng là nơi giúp các bạn giao lưu, học hỏi 
+        Chúng tôi chuyên cung cấp các sản phẩm chất lượng cao với giá cả hợp lý. 
+        Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.
+    </p>
+</section>
 
-    <!-- Phần Sản Phẩm -->
-    <section id="products">
-        <h2>Sản Phẩm Của Chúng Tôi</h2>
-        <div class="product">
-            <img src="images/product1.jpg" alt="Sản phẩm 1">
-            <p>Sản phẩm 1</p>
-            <p>Giá: 200,000 VND</p>
-            <button>Mua Ngay</button>
+<!-- Phần Sản Phẩm -->
+<section id="products">
+    <h2>Sản Phẩm</h2>
+    <div class="product-list">
+        <div class="product" data-id="1">
+            <img src="product1.jpg" alt="Sản Phẩm 1">
+            <p>Sản Phẩm 1</p>
+            <p>Giá: 500,000 VND</p>
+            <button class="add-to-cart">Thêm vào giỏ</button>
         </div>
-        <div class="product">
-            <img src="images/product2.jpg" alt="Sản phẩm 2">
-            <p>Sản phẩm 2</p>
-            <p>Giá: 300,000 VND</p>
-            <button>Mua Ngay</button>
+        <div class="product" data-id="2">
+            <img src="product2.jpg" alt="Sản Phẩm 2">
+            <p>Sản Phẩm 2</p>
+            <p>Giá: 700,000 VND</p>
+            <button class="add-to-cart">Thêm vào giỏ</button>
         </div>
-    </section>
+        <div class="product" data-id="3">
+            <img src="product3.jpg" alt="Sản Phẩm 3">
+            <p>Sản Phẩm 3</p>
+            <p>Giá: 450,000 VND</p>
+            <button class="add-to-cart">Thêm vào giỏ</button>
+        </div>
+    </div>
+</section>
 
-    <!-- Phần Video Quảng Cáo -->
-    <section id="promo-video">
-        <h2>Video Quảng Cáo</h2>
-        <video width="100%" controls>
-            <source src="videos/promo-video.mp4" type="video/mp4">
-            Trình duyệt của bạn không hỗ trợ video.
-        </video>
-    </section>
+<!-- Phần Giỏ Hàng -->
+<section id="cart">
+    <h2>Giỏ Hàng</h2>
+    <div id="cart-items">
+        <p>Giỏ hàng của bạn đang trống!</p>
+    </div>
+    <p id="total-price">Tổng tiền: 0 VND</p>
+    <button id="checkout" disabled>Thanh Toán</button>
+</section>
 
-    <!-- Phần Liên Hệ -->
-    <section id="contact">
-        <h2>Liên Hệ</h2>
-        <form>
-            <label for="name">Bảo Cương</label>
-            <input type="text" id="name" name="name" required>
-            
-            <label for="email">Email: cuongvujackot770@gmail.com</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="message">Tin nhắn:</label>
-            <textarea id="message" name="message" required></textarea>
-            
-            <button type="submit">Gửi</button>
-        </form>
-    </section>
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Shop Now. All Rights Reserved.</p>
+</footer>
 
-    <script src="js/script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
