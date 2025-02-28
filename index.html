@@ -1,106 +1,87 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Bán Hàng</title>
-    <link rel="stylesheet" href="style.css"> <!-- Liên kết tới file CSS -->
-</head>
-<body>
-
-    <!-- Header Section -->
-    <header>
-        <h1>Chợ Mua Sắm Online</h1>
-    </header>
-
-    <!-- Navigation Section -->
-    <nav>
-        <a href="#">Trang chủ</a>
-        <a href="#">Sản phẩm</a>
-        <a href="#">Khuyến mãi</a>
-        <a href="#">Liên hệ</a>
-    </nav>
-
-    <!-- Products Section -->
-    <section class="products">
-        <div class="product-card">
-            <img src="images/product1.jpg" alt="Product Image"> <!-- Đường dẫn ảnh -->
-            <h3>Sản phẩm 1</h3>
-            <p>$100</p>
-            <button>Thêm vào giỏ</button>
-        </div>
-        <div class="product-card">
-            <img src="images/product2.jpg" alt="Product Image">
-            <h3>Sản phẩm 2</h3>
-            <p>$150</p>
-            <button>Thêm vào giỏ</button>
-        </div>
-        <div class="product-card">
-            <img src="images/product3.jpg" alt="Product Image">
-            <h3>Sản phẩm 3</h3>
-            <p>$200</p>
-            <button>Thêm vào giỏ</button>
-        </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 Chợ Mua Sắm Online. All rights reserved.</p>
-    </footer>
-
-=======
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop Bán Hàng</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mojito.com</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <header>
-        <div class="logo">Shop Bán Hàng</div>
-        <nav>
-            <ul>
-                <li><a href="#">Trang Chủ</a></li>
-                <li><a href="#">Sản Phẩm</a></li>
-                <li><a href="#">Giỏ Hàng</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Menu -->
+    <nav>
+        <ul>
+            <li><a href="#home">Trang Chủ</a></li>
+            <li><a href="#products">Sản Phẩm</a></li>
+            <li><a href="#introduction">Giới Thiệu</a></li>
+            <li><a href="#contact">Liên Hệ</a></li>
+        </ul>
+    </nav>
 
-    <main>
-        <section class="products">
-            <h2>Sản phẩm nổi bật</h2>
-            <div class="product" data-id="1">
-                <img src="https://via.placeholder.com/150" alt="Sản phẩm 1">
-                <h3>Sản phẩm 1</h3>
-                <p>Giá: 200.000 VND</p>
-                <button class="add-to-cart">Thêm vào giỏ</button>
-            </div>
-            <div class="product" data-id="2">
-                <img src="https://via.placeholder.com/150" alt="Sản phẩm 2">
-                <h3>Sản phẩm 2</h3>
-                <p>Giá: 300.000 VND</p>
-                <button class="add-to-cart">Thêm vào giỏ</button>
-            </div>
-            <!-- Bạn có thể thêm nhiều sản phẩm hơn ở đây -->
-        </section>
+    <!-- Phần Trang Chủ -->
+    <section id="home">
+        <h1>Chào Mừng Bạn Đến Với Mojito</h1>
+        <p>Khám phá các sản phẩm chất lượng nhất tại cửa hàng của chúng tôi!</p>
+    </section>
 
-        <section class="cart">
-            <h2>Giỏ Hàng</h2>
-            <ul id="cart-items"></ul>
-            <p id="total-price">Tổng giá: 0 VND</p>
-            <button id="checkout" disabled>Thanh toán</button>
-        </section>
-    </main>
+    <!-- Phần Giới Thiệu -->
+    <section id="introduction">
+        <h2>Giới Thiệu Về Chúng Tôi</h2>
+        <img src="images/about-us.jpg" alt="Giới Thiệu Chúng Tôi">
+        <p>
+            Chào mừng bạn đến với Mojito!
+            Xin tự giới thiệu, tôi là Bảo Cương là CEO và Founder của Mojito, đây ngoài là nơi giao lưu cũng là nơi giúp các bạn giao lưu, học hỏi 
+            Chúng tôi chuyên cung cấp các sản phẩm chất lượng cao với giá cả hợp lý. 
+            Sự hài lòng của khách hàng là ưu tiên hàng đầu của chúng tôi.
+        </p>
+        <p>
+            Hãy khám phá và viết lên câu chuyện của mình để tận hưởng những trải nghiệm tuyệt vời nhất
+        </p>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Shop Bán Hàng</p>
-    </footer>
+    <!-- Phần Sản Phẩm -->
+    <section id="products">
+        <h2>Sản Phẩm Của Chúng Tôi</h2>
+        <div class="product">
+            <img src="images/product1.jpg" alt="Sản phẩm 1">
+            <p>Sản phẩm 1</p>
+            <p>Giá: 200,000 VND</p>
+            <button>Mua Ngay</button>
+        </div>
+        <div class="product">
+            <img src="images/product2.jpg" alt="Sản phẩm 2">
+            <p>Sản phẩm 2</p>
+            <p>Giá: 300,000 VND</p>
+            <button>Mua Ngay</button>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
->>>>>>> 3885a77a060970df55f4620c6c3915da6719864a
+    <!-- Phần Video Quảng Cáo -->
+    <section id="promo-video">
+        <h2>Video Quảng Cáo</h2>
+        <video width="100%" controls>
+            <source src="videos/promo-video.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+    </section>
+
+    <!-- Phần Liên Hệ -->
+    <section id="contact">
+        <h2>Liên Hệ</h2>
+        <form>
+            <label for="name">Bảo Cương</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email: cuongvujackot770@gmail.com</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Tin nhắn:</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Gửi</button>
+        </form>
+    </section>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
