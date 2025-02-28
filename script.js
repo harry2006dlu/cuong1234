@@ -47,4 +47,42 @@ document.getElementById('checkout').addEventListener('click', function() {
     alert("Chức năng thanh toán qua Momo sẽ được thực hiện tại đây. Hãy thử lại sau.");
 });
 
-
+// Popup thông báo
+window.onload = function() {
+    document.getElementById('popup').style.display = 'block';
+  };
+  
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+  
+  // Thanh toán qua MoMo
+  function initiatePayment() {
+    const requestData = {
+      amount: 100000,  // Số tiền thanh toán
+      orderId: 'order123',
+      orderInfo: 'Thanh toán cho dịch vụ',
+      redirectUrl: 'https://yourwebsite.com/payment_success',  // Địa chỉ chuyển hướng khi thành công
+      ipnUrl: 'https://yourwebsite.com/payment_notify',  // Địa chỉ nhận thông báo kết quả thanh toán
+      extraData: ''  // Thêm dữ liệu nếu cần
+    };
+  
+    // Gửi yêu cầu thanh toán qua MoMo API
+    fetch('https://payment.momo.vn/api/execute', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.resultCode === '0') {
+        window.location.href = data.payUrl;  // Chuyển đến trang thanh toán của MoMo
+      } else {
+        alert('Payment failed!');
+      }
+    })
+    .catch(err => console.error('Error:', err));
+  }
+  
