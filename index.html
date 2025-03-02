@@ -3,135 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <title>Mojito - Premium Cocktails & Lifestyle</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="mojito-loader"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">Your Logo</div>
+        <div class="logo">
+            <img src="mojito-logo.png" alt="Mojito">
+        </div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#shop">Shop</a></li>
-            <li><a href="#videos">Videos</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#recipes">Recipes</a></li>
+            <li><a href="#about">Our Story</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#cart" class="cart-icon">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count">0</span>
-            </a></li>
+            <li>
+                <a href="#cart" class="cart-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </li>
         </ul>
         <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
         </div>
     </nav>
 
-    <!-- Home Section -->
+    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Welcome to Our Store</h1>
-            <p>Discover amazing products and videos</p>
-            <a href="#shop" class="cta-button">Shop Now</a>
+            <h1>Fresh Vibes.<br>Premium Spirits.</h1>
+            <p>Experience the authentic taste of Cuban tradition</p>
+            <a href="#collection" class="cta-button">Explore Collection</a>
+        </div>
+        <div class="hero-image">
+            <img src="hero-mojito.png" alt="Signature Mojito">
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <p>Scroll to discover</p>
         </div>
     </section>
 
-    <!-- Shop Section -->
-    <section id="shop" class="shop-section">
-        <h2>Our Products</h2>
+    <!-- Featured Products -->
+    <section id="collection" class="collection">
+        <div class="section-header">
+            <h2>Premium Collection</h2>
+            <p>Handcrafted with premium ingredients</p>
+        </div>
         <div class="products-grid">
             <!-- Products will be dynamically added here -->
         </div>
     </section>
 
-    <!-- Videos Section -->
-    <section id="videos" class="videos-section">
-        <h2>Featured Videos</h2>
-        <div class="video-grid">
-            <div class="video-card">
-                <video controls>
-                    <source src="video1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <h3>Video Title 1</h3>
-                <p>Video description goes here</p>
+    <!-- Video Section -->
+    <section class="video-feature">
+        <div class="video-content">
+            <h2>The Art of Mojito</h2>
+            <p>Watch how our master mixologists craft the perfect mojito</p>
+            <button class="play-btn">
+                <i class="fas fa-play"></i>
+            </button>
+        </div>
+        <video id="mojito-video" poster="video-thumbnail.jpg">
+            <source src="mojito-making.mp4" type="video/mp4">
+        </video>
+    </section>
+
+    <!-- Recipe Section -->
+    <section id="recipes" class="recipes">
+        <div class="section-header">
+            <h2>Signature Recipes</h2>
+            <p>Create your perfect moment</p>
+        </div>
+        <div class="recipe-slider">
+            <!-- Recipe cards will be added here -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Born in the vibrant streets of Havana, our passion for authentic mojitos has evolved into a premium lifestyle brand that celebrates the spirit of Cuba.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>1862</h3>
+                        <p>Founded</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Countries</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1M+</h3>
+                        <p>Happy Customers</p>
+                    </div>
+                </div>
             </div>
-            <!-- More video cards -->
+            <div class="about-image">
+                <img src="about-image.jpg" alt="Our Heritage">
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2>Contact Us</h2>
-        <form id="contact-form">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <p>Share your moments with us</p>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>123 Havana Street, Miami, FL</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+1 (305) 555-0123</p>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>hello@mojito.com</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about-section">
-        <h2>About Us</h2>
-        <div class="about-content">
-            <div class="about-text">
-                <h3>Our Story</h3>
-                <p>Your company story goes here...</p>
-            </div>
-            <div class="about-image">
-                <img src="about-image.jpg" alt="About Us">
-            </div>
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Your Email</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" required></textarea>
+                    <label for="message">Your Message</label>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
         </div>
     </section>
-
-    <!-- Cart Modal -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Shopping Cart</h2>
-            <div class="cart-items">
-                <!-- Cart items will be dynamically added here -->
-            </div>
-            <div class="cart-total">
-                <p>Total: $<span id="cart-total">0</span></p>
-                <button class="checkout-btn">Checkout</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p>Email: contact@example.com</p>
-                <p>Phone: (123) 456-7890</p>
+                <img src="mojito-logo-white.png" alt="Mojito" class="footer-logo">
+                <p>Premium cocktails for the sophisticated palate</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#collection">Collection</a></li>
+                    <li><a href="#recipes">Recipes</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Follow Us</h3>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
                 </div>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 Your Website. All rights reserved.</p>
+            <p>&copy; 2024 Mojito. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Cart</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-total">
+                <div class="total">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+                <button class="checkout-btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
