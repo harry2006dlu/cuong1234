@@ -2,33 +2,124 @@
 const products = [
   {
       id: 1,
-      name: "Classic Mojito",
+      name: "Classic ",
       price: 12.99,
       image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-      description: "Traditional Cuban mojito with fresh mint"
+      description: "Traditional Cuban with fresh mint"
   },
   {
       id: 2,
-      name: "Strawberry Mojito",
+      name: "Strawberry ",
       price: 14.99,
       image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
       description: "Sweet strawberry flavor with mint"
   },
   {
       id: 3,
-      name: "Coconut Mojito",
+      name: "Coconut ",
       price: 13.99,
       image: "https://images.unsplash.com/photo-1587223075055-82e9a937ddff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
       description: "Tropical coconut with fresh lime"
   },
   {
       id: 4,
-      name: "Passion Fruit Mojito",
+      name: "Passion Fruit",
       price: 15.99,
       image: "https://images.unsplash.com/photo-1546171753-97d7676e4602?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
       description: "Exotic passion fruit blend"
   }
 ];
+
+// Tiktok shop api
+class TikTokProducts {
+  constructor() {
+      this.productsContainer = document.getElementById('products-grid');
+      this.paginationContainer = document.getElementById('pagination');
+      this.currentPage = 1;
+      this.productsPerPage = 20;
+      
+      this.init();
+  }
+
+  async init() {
+      await this.loadProducts();
+      this.setupEventListeners();
+  }
+
+  async loadProducts(page = 1) {
+      try {
+          const response = await fetch(`/backend/api/tiktok-products?page=${page}`);
+          const data = await response.json();
+          
+          if (data.products) {
+              this.renderProducts(data.products);
+              this.renderPagination(data.total_pages);
+          }
+      } catch (error) {
+          console.error('Error loading products:', error);
+          this.showError('Failed to load products');
+      }
+  }
+
+  renderProducts(products) {
+      this.productsContainer.innerHTML = products.map(product => `
+          <div class="product-card">
+              <img src="${product.image}" alt="${product.name}" class="product-image">
+              <div class="product-info">
+                  <h3>${product.name}</h3>
+                  <p class="price">${product.price}</p>
+                  <div class="product-stats">
+                      <span class="sales">${product.sales_count} sold</span>
+                      <span class="rating">${product.rating} ⭐</span>
+                  </div>
+                  <a href="${product.product_url}" target="_blank" class="buy-button">
+                      Buy on TikTok Shop
+                  </a>
+              </div>
+          </div>
+      `).join('');
+  }
+
+  renderPagination(totalPages) {
+      this.paginationContainer.innerHTML = `
+          <button class="prev-btn" ${this.currentPage === 1 ? 'disabled' : ''}>
+              Previous
+          </button>
+          <span class="page-info">Page ${this.currentPage} of ${totalPages}</span>
+          <button class="next-btn" ${this.currentPage === totalPages ? 'disabled' : ''}>
+              Next
+          </button>
+      `;
+  }
+
+  setupEventListeners() {
+      this.paginationContainer.addEventListener('click', (e) => {
+          if (e.target.classList.contains('prev-btn') && this.currentPage > 1) {
+              this.currentPage--;
+              this.loadProducts(this.currentPage);
+          }
+          if (e.target.classList.contains('next-btn')) {
+              this.currentPage++;
+              this.loadProducts(this.currentPage);
+          }
+      });
+  }
+
+  showError(message) {
+      this.productsContainer.innerHTML = `
+          <div class="error-message">
+              <p>${message}</p>
+              <button onclick="location.reload()">Try Again</button>
+          </div>
+      `;
+  }
+}
+
+// Initialize when document is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new TikTokProducts();
+});
+
 
 // DOM Elements
 const productsGrid = document.querySelector('.products-grid');
