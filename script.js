@@ -107,7 +107,11 @@ function updateCart() {
   cartTotal.textContent = total.toFixed(2);
 
   // Save cart to localStorage
-  localStorage.setItem('cart', JSON.stringify(cart));
+  try {
+      localStorage.setItem('cart', JSON.stringify(cart));
+  } catch (error) {
+      console.error("Error saving cart to localStorage", error);
+  }
 }
 
 function updateQuantity(productId, newQuantity) {
@@ -130,7 +134,7 @@ function removeFromCart(productId) {
 }
 
 // Cart Modal
-document.querySelector('.cart-icon').addEventListener('click', (e) => {
+document.querySelector('.cart-icon')?.addEventListener('click', (e) => {
   e.preventDefault();
   cartModal.style.display = 'block';
 });
@@ -169,10 +173,10 @@ contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = new FormData(contactForm);
   const formObject = Object.fromEntries(formData);
-  
+
   // Here you would typically send this data to a server
   console.log('Form submitted:', formObject);
-  
+
   showNotification('Message sent successfully!');
   contactForm.reset();
 });
@@ -201,15 +205,13 @@ window.addEventListener('load', () => {
 });
 
 // Checkout Function
-checkoutBtn.addEventListener('click', () => {
+checkoutBtn?.addEventListener('click', () => {
   if (cart.length === 0) {
       showNotification('Your cart is empty!');
       return;
   }
-  
-  // Here you would typically redirect to a checkout page or open a checkout modal
+
   showNotification('Proceeding to checkout...');
-  // Simulate checkout process
   setTimeout(() => {
       cart = [];
       updateCart();
