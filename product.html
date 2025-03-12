@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản Phẩm</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Liên kết đến CSS -->
+</head>
+<body>
+
+    <!-- Menu -->
+    <nav>
+        <ul>
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li><a href="products.html">Sản Phẩm</a></li>
+        <li><a href="cart.html" id="cart-icon">
+            <i class="fa fa-shopping-cart"></i> Giỏ Hàng (<span id="cart-count">0</span>)
+        </a></li>
+        <li><a href="about.html">Về Chúng Tôi</a></li>
+        </ul>
+    </nav>
+
+    <h1>Các Sản Phẩm Của Chúng Tôi</h1>
+    <p>Đây là các sản phẩm của chúng tôi:</p>
+    <!-- Danh sách sản phẩm -->
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <h2>Sản phẩm</h2>
+        <div class="products-grid">
+        <!-- Products will be loaded dynamically -->
+    </div>
+    <div class="tiktok-products-container">
+        <h2>Sản phẩm</h2>
+        <div id="products-grid" class="products-grid"></div>
+        <div id="pagination" class="pagination"></div>
+    </div>
+</section>
+
+    <script src="script.js"></script> <!-- Liên kết đến JavaScript -->
+</body>
+</html>
