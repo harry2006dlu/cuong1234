@@ -8,8 +8,8 @@ class TikTokProductController extends Controller {
     public function __construct($db, $requestMethod, $id = null) {
         parent::__construct($db, $requestMethod, $id);
         $this->tiktokAPI = new TikTokShopAPI(
-            'YOUR_APP_KEY',
-            'YOUR_APP_SECRET',
+            '6fhag6sdtcssb',
+            '47fe5e03b778eaddee91c3b97e6db8199c7b7037',
             'YOUR_ACCESS_TOKEN'
         );
     }

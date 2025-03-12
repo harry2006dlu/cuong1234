@@ -15,10 +15,14 @@
             <h1>Mojito </h1>
         </div>
         <ul class="nav-links">
-            <li><a href="#home">Trang Chủ</a></li>
-            <li><a href="#products">Sản Phẩm</a></li>
-            <li><a href="#about">Về Chúng Tôi</a></li>
-            <li><a href="#contact">Liên Hệ</a></li>
+            <li><a href="#home" onclick="showContent('home')">Trang Chủ</a></li>
+            <li><a href="#products" onclick="showContent('products')">Sản Phẩm</a></li>
+            <li><a href="#about" onclick="showContent('about')">Về Chúng Tôi</a></li>
+            <li><a href="#contact" onclick="showContent('contact')">Liên Hệ</a></li>
+            <li><button onclick="showContent('home')">Trang chủ</button></li>
+            <li><button onclick="showContent('about')">Giới thiệu</button></li>
+            <li><button onclick="showContent('services')">Dịch vụ</button></li>
+            <li><button onclick="showContent('contact')">Liên hệ</button></li>
             <li>
                 <a href="#cart" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -119,3 +123,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
