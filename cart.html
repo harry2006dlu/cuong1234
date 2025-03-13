@@ -8,17 +8,31 @@
 </head>
 <body class="cart-page">
    <!-- Navigation -->
-  <nav class="navbar">
+   <nav class="navbar">
     <div class="logo">
         <h1>Mojito </h1>
     </div>
     <ul class="nav-links">
-        <li><a href="index.html">Trang Chủ</a></li>
-        <li><a href="products.html">Sản Phẩm</a></li>
-        <li><a href="cart.html" id="cart-icon">
-            <i class="fa fa-shopping-cart"></i> Giỏ Hàng (<span id="cart-count">0</span>)
-        </a></li>
-        <li><a href="about.html">Về Chúng Tôi</a></li>
+        <li class="nav-item">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-home"></i> Trang Chủ
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="products.html" class="nav-link">
+                <i class="fas fa-box"></i>Sản Phẩm
+            </a>
+        </li>
+        <li class="nav-item" id="cart-icon">
+            <a href="cart.html" class="nav-link">
+                <i class="fas fa-shopping-cart"></i>Giỏ Hàng
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="about.html" class="nav-link">
+                <i class="fas fa-info-circle"></i>Về Chúng Tôi
+            </a>
+        </li>
         <li>
             <a href="#cart" class="cart-icon">
                 <i class="fas fa-shopping-cart"></i>
@@ -31,8 +45,7 @@
         <div class="line2"></div>
         <div class="line3"></div>
     </div>
-  </nav>
-
+</nav>
 
   <h1>Giỏ Hàng Của Bạn</h1>
   <div id="cart-items">
