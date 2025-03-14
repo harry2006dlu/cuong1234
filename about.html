@@ -3,52 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Về Chúng Tôi</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Liên kết đến CSS -->
+    <title>Mojito.com</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+    
 <body class="about-page">
 
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="logo">
-            <h1>Mojito </h1>
-        </div>
-        <ul class="nav-links">
-            <li class="nav-item">
-                <a href="index.html" class="nav-link">
-                    <i class="fas fa-home"></i> Trang Chủ
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="products.html" class="nav-link">
-                    <i class="fas fa-box"></i>Sản Phẩm
-                </a>
-            </li>
-            <li class="nav-item" id="cart-icon">
-                <a href="cart.html" class="nav-link">
-                    <i class="fas fa-shopping-cart"></i>Giỏ Hàng
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="about.html" class="nav-link">
-                    <i class="fas fa-info-circle"></i>Về Chúng Tôi
-                </a>
-            </li>
-            <li>
-                <a href="#cart" class="cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </a>
-            </li>
-        </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
+    <div class="container">
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Mojito </h1>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> 
+                        <span> Trang Chủ </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <i class="fas fa-box"></i>
+                        <span> Sản Phẩm </span>
+                    </a>
+                </li>
+                <li class="nav-item" id="cart-icon">
+                    <a href="cart.html" class="nav-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span> Giỏ Hàng </span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> 
+                        <span> Về Chúng Tôi </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cart" class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="burger-container">   
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </div>
+        </nav>
+    </div>
     
-
     <!-- About Section -->
     <section id="about" class="about">
         <div class="about-content">

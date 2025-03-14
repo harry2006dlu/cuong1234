@@ -1,9 +1,9 @@
 :root {
     --primary-color: #2ecc71;
     --secondary-color: #27ae60;
-    --text-color: #333;
-    --light-gray: #f4f4f4;
-    --white: #ffffff;
+    --text-color: #fff;
+    --light-gray: #007BFF;
+    --white: white;
 }
 
 * {
@@ -18,30 +18,16 @@ body {
 }
 
 /* Navigation */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    padding: 20px;
-    background: var(--white);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
-.logo h1 {
-    color: var(--primary-color);
-    font-size: 24px;
-}
-
+/* Các liên kết trong navbar */
 .nav-links {
-    display: flex;
+    display: flex; /* Navbar hiển thị ngang trên màn hình lớn */
     list-style: none;
     gap: 30px;
+    justify-content: center; /* Canh giữa các liên kết */
 }
 
+/* Các liên kết */
 .nav-links a {
     text-decoration: none;
     color: var(--text-color);
@@ -51,6 +37,130 @@ body {
 .nav-links a:hover {
     color: var(--primary-color);
 }
+
+/* Căn giữa navbar toàn bộ trang */
+.container {
+    position: fixed;  /* Giữ navbar ở vị trí cố định */
+    top: 0;           /* Đặt navbar ở vị trí trên cùng */
+    left: 0;          /* Đảm bảo navbar căn lề trái */
+    width: 100%;      /* Navbar chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000;    /* Đảm bảo navbar luôn hiển thị trên các phần tử khác */                     /* Chiều rộng của container = 100% chiều rộng màn hình */
+}
+
+/* Bao quanh burger menu */
+.burger-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* Căn giữa burger trong container */
+    padding: 5px;             /* Padding xung quanh burger */
+    flex-shrink: 0;            /* Padding xung quanh burger */
+}
+
+/* Style cho navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+}
+
+/* Logo */
+.logo h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Các mục trong navbar */
+.nav-item {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Liên kết (icon ở trên, chữ ở dưới) */
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+}
+
+.nav-link i {
+    font-size: 24px; /* Kích thước icon */
+    margin-bottom: 5px; /* Khoảng cách giữa icon và chữ */
+}
+
+.nav-link span {
+    display: inline-block;
+}
+
+/* Hiển thị icon giỏ hàng */
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+}
+
+/* Burger menu */
+.burger {
+    display: none; /* Ẩn burger menu trên màn hình lớn */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+}
+
+.burger div {
+    background-color: #fff;
+    height: 4px;
+    width: 100%;
+}
+
+/* Media query cho responsive (mobile & tablet) */
+@media (max-width: 768px) {
+    /* Ẩn navbar khi màn hình nhỏ và chỉ hiển thị burger menu */
+    .nav-links {
+        display: none; /* Navbar bị ẩn */
+        width: 100%;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #333;
+        padding: 10px;
+        text-align: center;
+    }
+
+    /* Khi burger menu được nhấn, hiển thị navbar */
+    .nav-links.active {
+        display: flex; /* Hiển thị navbar */
+    }
+
+    /* Hiển thị burger menu */
+    .burger {
+        display: flex;
+    }
+
+    /* Điều chỉnh khoảng cách các mục trong navbar */
+    .nav-item {
+        margin: 15px 0;
+    }
+}
+
 
 /* Hero Section */
 .hero {
