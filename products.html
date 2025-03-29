@@ -11,53 +11,251 @@
 
 <body class="products-page">
     
-    <!-- Navigation -->
-    <div class="container">
-        <nav class="navbar">
-            <div class="logo">
-                <h1>Mojito </h1>
-            </div>
-            <ul class="nav-links">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link">
-                        <i class="fas fa-home"></i> 
-                        <span> Trang Chủ </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="products.html" class="nav-link">
-                        <i class="fas fa-box"></i>
-                        <span> Sản Phẩm </span>
-                    </a>
-                </li>
-                <li class="nav-item" id="cart-icon">
-                    <a href="cart.html" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span> Giỏ Hàng </span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">
-                        <i class="fas fa-info-circle"></i> 
-                        <span> Về Chúng Tôi </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#cart" class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="burger-container">   
-                <div class="burger">
-                    <div class="line1"></div>
-                    <div class="line2"></div>
-                    <div class="line3"></div>
-                </div>
-            </div>
-        </nav>
-    </div>
+    <style>
+        /* Cài đặt cho toàn bộ trang */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.container {
+    position: fixed;  /* Giữ navbar ở vị trí cố định */
+    top: 0;           /* Đặt navbar ở vị trí trên cùng */
+    left: 0;          /* Đảm bảo navbar căn lề trái */
+    width: 100%;      /* Navbar chiếm toàn bộ chiều rộng màn hình */
+    z-index: 1000;    /* Đảm bảo navbar luôn hiển thị trên các phần tử khác */                     /* Chiều rộng của container = 100% chiều rộng màn hình */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Căn giữa navbar */
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+     /* margin-right: auto; Đảm bảo logo luôn ở bên trái */
+}
+
+.nav-linksz {
+    display: flex;
+    justify-content: center; /* Căn giữa các mục trong navbar */
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-item {
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*font-size: 1rem;
+    padding: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;*/
+}
+
+.nav-link i {
+    font-size: 24px; /* Kích thước icon */
+    margin-bottom: 5px; /* Khoảng cách giữa icon và văn bản */
+}
+
+.nav-link span {
+    display: block;
+}
+    
+
+/* Hiệu ứng hover */
+.nav-link:hover {
+    color: #27ae60; /* Màu xanh lá khi hover */
+    background-color: #222; /* Nền đen khi hover */
+    border-radius: 5px;
+}
+
+/* Giỏ hàng */
+.cart-icon {
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+}
+
+/* Hiển thị burger menu */
+@media (max-width: 768px) {
+    /* Hiển thị navbar theo chiều dọc trên màn hình nhỏ 
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }*/
+    .navbar {
+        display: flex;                /* Dùng flexbox để căn chỉnh các phần tử */
+        justify-content: space-between; /* Đảm bảo các phần tử được phân phối đều */
+        align-items: center;           /* Căn giữa các phần tử theo chiều dọc */
+        padding: 10px 20px;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    /* Căn giữa các mục trong navbar khi màn hình nhỏ */
+    .nav-linksz {
+        display: none; /* Navbar bị ẩn */
+        width: 100%;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #333;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .nav-linksz.active {
+        display: flex; /* Hiển thị navbar khi nhấn burger menu */
+    }
+
+    .nav-item {
+        margin: 15px 0; /* Khoảng cách giữa các mục */
+    }
+
+    /* Hiển thị burger menu */
+    .burger-container {
+        display: block; /* Hiển thị burger menu */
+    }
+
+    .burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 25px;
+        height: 20px;
+        margin-top: 10px;
+    }
+
+    .burger div {
+        background-color: #fff;
+        height: 4px;
+        width: 100%;
+      
+    }
+
+    .burger-container {
+        display: block;
+        margin-left: auto; /* Căn phải trên navbar */
+        margin-right: 20px; /* Thêm khoảng cách bên phải */
+        cursor: pointer;
+    }
+
+    /* Khi burger menu được nhấn, navbar hiển thị */
+    .nav-linksz.active {
+        display: flex;
+        flex-direction: column;
+        background-color: #333;
+        padding: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+}
+    </style>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const items = document.querySelectorAll('.about-item');
+            const windowHeight = window.innerHeight;
+            
+            items.forEach(item => {
+                const position = item.getBoundingClientRect().top;
+                if (position < windowHeight - 100) {
+                    item.classList.add('show');
+                }
+            });
+        });
+
+        const burger = document.querySelector('.burger-container');
+    const navLinks = document.querySelector('.nav-linksz');
+
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lấy tất cả các phần tử burger (menu) và navbar trên trang
+            const burgers = document.querySelectorAll(".burger");  // Lấy tất cả các burger
+            const navbars = document.querySelectorAll(".navbar");  // Lấy tất cả các navbar
+            const productsPage= document.getElementById('products-page');
+            const cartPage= document.getElementById('cart-page');
+            const aboutPage= document.getElementById('about-page');
+        
+            // Duyệt qua tất cả các burger và navbar
+            burgers.forEach((burger, index) => {
+                burger.addEventListener("click", function () {
+                    // Lấy navbar và nav-links tương ứng với burger đang được click
+                    const navbar = navbars[index];
+                    const navLinks = navbar.querySelector(".nav-links");
+                    const navLinkss = navbar.querySelector(".nav-linkss");
+                    const navLinksz = navbar.querySelector(".nav-linksz");
+                    const navLinkszz = navbar.querySelector(".nav-linkszz");
+        
+                    // Thêm hoặc bỏ class 'active' cho navbar và nav-links
+                    navbar.classList.toggle("active");
+                    if (navLinks) {
+                        navLinks.classList.toggle("active");
+                    }
+                    navbar.classLists.toggle("active");
+                    if (navLinkss) {
+                        navLinkss.classLists.toggle("active");
+                    }
+                    
+                    if (navLinksz) {
+                        navLinksz.classListz.toggle("active");
+                    }
+                    if (navLinkszz) {
+                        navLinkszz.classListzz.toggle("active");
+                    }
+        
+                    // Thêm hoặc bỏ class 'toggle' cho burger để thay đổi hình dạng
+                    burger.classList.toggle("toggle");
+                    burger.classLists.toggle("toggle");
+                    burger.classListz.toggle("toggle");
+                    burger.classListzz.toggle("toggle");
+                });
+            });
+        });
+    </script>
 
     <h1>Các Sản Phẩm Của Chúng Tôi</h1>
     <p>Đây là các sản phẩm của chúng tôi:</p>
@@ -67,9 +265,9 @@
         <h2>Sản phẩm</h2>
         <div class="products-grid">
         <!-- Products will be loaded dynamically -->
-    </div>
-</section>
+        </div>
+    </section>
 
-    <script src="script.js"></script> <!-- Liên kết đến JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

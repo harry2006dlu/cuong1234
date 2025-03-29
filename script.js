@@ -32,12 +32,6 @@ const products = [
 
 // Tiktok shop api
 
-// Initialize when document is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    new TikTokProducts();
-});
-
-
 // DOM Elements
 const productsGrid = document.querySelector('.products-grid');
 const cartModal = document.getElementById('cart-modal');
@@ -49,6 +43,9 @@ const checkoutBtn = document.querySelector('.checkout-btn');
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('.navbar');
 const contactForm = document.getElementById('contact-form');
+const productsPage= document.getElementById('products-page');
+const cartPage= document.getElementById('cart-page');
+const aboutPage= document.getElementById('about-page');
 
 // Cart Array
 let cart = [];
@@ -158,23 +155,48 @@ window.addEventListener('click', (e) => {
 });
 
 // Mobile Navigation (toggle navbar khi click vào burger)
-const navLinks = document.querySelector('.nav-links');
-
 document.addEventListener("DOMContentLoaded", function () {
-    const burgerMenu = document.querySelector(".burger");
-    const navbar = document.querySelector(".navbar");
+    // Lấy tất cả các phần tử burger (menu) và navbar trên trang
+    const burgers = document.querySelectorAll(".burger");  // Lấy tất cả các burger
+    const navbars = document.querySelectorAll(".navbar");  // Lấy tất cả các navbar
+    const productsPage= document.getElementById('products-page');
+    const cartPage= document.getElementById('cart-page');
+    const aboutPage= document.getElementById('about-page');
 
-    if (burgerMenu && navbar) {
-        burgerMenu.addEventListener("click", function () {
+    // Duyệt qua tất cả các burger và navbar
+    burgers.forEach((burger, index) => {
+        burger.addEventListener("click", function () {
+            // Lấy navbar và nav-links tương ứng với burger đang được click
+            const navbar = navbars[index];
+            const navLinks = navbar.querySelector(".nav-links");
+            const navLinkss = navbar.querySelector(".nav-linkss");
+            const navLinksz = navbar.querySelector(".nav-linksz");
+            const navLinkszz = navbar.querySelector(".nav-linkszz");
+
+            // Thêm hoặc bỏ class 'active' cho navbar và nav-links
             navbar.classList.toggle("active");
-        });
-    }
-});
+            if (navLinks) {
+                navLinks.classList.toggle("active");
+            }
+            navbar.classLists.toggle("active");
+            if (navLinkss) {
+                navLinkss.classLists.toggle("active");
+            }
+            
+            if (navLinksz) {
+                navLinksz.classListz.toggle("active");
+            }
+            if (navLinkszz) {
+                navLinkszz.classListzz.toggle("active");
+            }
 
-burger.addEventListener('click', () => {
-    // Toggle class 'active' cho navbar, để hiển thị hoặc ẩn navbar khi click vào burger
-    navLinks.classList.toggle('active');  // Thêm hoặc bỏ class 'active' để hiển thị/ẩn navbar
-    burger.classList.toggle('toggle');    // Thêm hoặc bỏ class 'toggle' để thay đổi hình dạng burger (nếu muốn)
+            // Thêm hoặc bỏ class 'toggle' cho burger để thay đổi hình dạng
+            burger.classList.toggle("toggle");
+            burger.classLists.toggle("toggle");
+            burger.classListz.toggle("toggle");
+            burger.classListzz.toggle("toggle");
+        });
+    });
 });
 
 // Notification System
@@ -311,6 +333,6 @@ style.textContent = `
     .add-to-cart-btn:hover {
         background: var(--secondary-color);
     }
-`;
+;`
 
 document.head.appendChild(style);
