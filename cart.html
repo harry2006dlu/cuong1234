@@ -58,6 +58,13 @@
         </nav>
     </div>
 
+    <main>
+        <section>
+            <h1>Giỏ Hàng Của Bạn</h1>
+            <div id="cart-container"></div>
+                <!-- Các sản phẩm sẽ được hiển thị ở đây thông qua JavaScript -->
+    </main>
+
     <style>
         /* Cài đặt cho toàn bộ trang */
 * {
@@ -68,10 +75,13 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
+    padding: 40px;
+    background-color: #f5f5f5;
+  }
+
+  main {
+    padding-top: 80px; /* Đẩy nội dung xuống dưới thanh navbar */
+  }
 
 /* Navigation */
 .container {
@@ -237,6 +247,35 @@ body {
         text-align: center;
     }
 }
+
+    
+    .cart-item {
+        display: flex;
+        align-items: center;
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .cart-item img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 6px;
+        margin-right: 20px;
+    }
+
+    .cart-item h3 {
+        margin: 0 0 10px 0;
+    }
+
+    .cart-item p {
+        margin: 0;
+        color: #e53935;
+        font-weight: bold;
+    }
     </style>
 
     <script>
@@ -302,12 +341,30 @@ body {
                 });
             });
         });
+
+        // render hàng từ localstorage
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const container = document.getElementById("cart-container");
+
+        if (cart.length === 0) {
+            container.innerHTML = "<p>Giỏ hàng trống.</p>";
+        } else {
+            cart.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "cart-item";
+            div.innerHTML = `
+                <img src="${item.thumbnail}" alt="${item.title}" width="100">
+                <div>
+                <h3>${item.title}</h3>
+                <p>${item.price.toLocaleString()}₫</p>
+                </div>
+            `;
+            container.appendChild(div);
+            });
+        }
+
     </script>
 
-    <h1>Giỏ Hàng Của Bạn</h1>
-    <div id="cart-items">
-        <!-- Các sản phẩm sẽ được hiển thị ở đây thông qua JavaScript -->
-    </div>
 
     <script src="script.js"></script> <!-- Liên kết đến JavaScript -->
 </body>

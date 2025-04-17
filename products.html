@@ -59,6 +59,25 @@
         </nav>
     </div>
 
+    <main>
+        <div class="search-wrapper">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+                <button id="searchBtn" aria-label="Tìm kiếm">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <ul id="suggestionList" class="suggestions"></ul>
+        </div>
+    </main>
+
+    <section class="page-content">
+        <h1>Sản phẩm</h1>
+        <div class="product-grid" id="product-list">
+          <!-- Sản phẩm sẽ được render ở đây bằng JS -->
+        </div>
+    </section>
+
     <style>
         /* Cài đặt cho toàn bộ trang */
 * {
@@ -73,6 +92,39 @@ body {
     color: #333;
     line-height: 1.6;
 }
+  .suggestions {
+    position: absolute;
+    top: calc(100% + 4px); /* nằm ngay dưới ô search, cách ra 4px */
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .suggestions li {
+    padding: 10px 14px;
+    cursor: pointer;
+  }
+  
+  .suggestions li:hover {
+    background-color: #f0fffc;
+    color: #00C8A0;
+  }
+  
+main {
+    padding-top: 80px; /* Đẩy nội dung xuống dưới thanh navbar */
+    position: relative; /* Quan trọng */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
 
 /* Navigation */
 .container {
@@ -160,6 +212,56 @@ body {
     font-size: 12px;
 }
 
+    .search-container {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    }
+    .search-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+      
+    #searchInput {
+        flex: 1;
+        padding: 14px 18px;
+        font-size: 16px;
+        border: 2px solid #00C8A0;
+        border-right: none;
+        border-radius: 8px 0 0 8px;
+        outline: none;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 2;
+      }
+      
+      #searchBtn {
+        background: white;
+        border: 2px solid #00C8A0;
+        border-left: none;
+        border-radius: 0 8px 8px 0;
+        padding: 14px 18px;
+        cursor: pointer;
+        z-index: 2;
+      }
+      
+    #searchInput:focus {
+        box-shadow: 0 0 0 2px rgba(0, 200, 160, 0.2);
+    }
+      
+    #searchBtn:hover {
+        background-color: #f0fffc;
+    }
+      
+    #searchBtn i {
+        color: #00C8A0;
+        font-size: 18px;
+    }
+
 /* Hiển thị burger menu */
 @media (max-width: 768px) {
     /* Hiển thị navbar theo chiều dọc trên màn hình nhỏ 
@@ -238,6 +340,64 @@ body {
         text-align: center;
     }
 }
+
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .page-content {
+        padding: 40px;
+        margin-top: 1px; /* Đẩy xuống dưới navbar */
+    }
+  
+  .product-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .product-card:hover {
+    transform: scale(1.03);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  .product-card h3 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+  }
+
+  .product-card p {
+    color: #ff5722;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .product-card button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .product-card button:hover {
+    background-color: #e64a19;
+  }
+
     </style>
 
     <script>
@@ -303,19 +463,102 @@ body {
                 });
             });
         });
+
+        const input = document.getElementById("searchInput");
+        const suggestBox = document.getElementById("suggestionList");
+
+        let debounceTimer;
+
+        input.addEventListener("input", () => {
+        const value = input.value.trim();
+
+        clearTimeout(debounceTimer);
+
+        if (value.length === 0) {
+            suggestBox.innerHTML = "";
+            return;
+        }
+
+        // Đợi 300ms mới gọi API
+        debounceTimer = setTimeout(() => {
+            fetch(`https://dummyjson.com/products/search?q=${value}`)
+            .then(res => res.json())
+            .then(data => {
+                suggestBox.innerHTML = "";
+
+                const results = data.products.slice(0, 5); // Giới hạn 5 gợi ý
+
+                results.forEach(product => {
+                const li = document.createElement("li");
+                li.textContent = product.title;
+                li.addEventListener("click", () => {
+                    input.value = product.title;
+                    suggestBox.innerHTML = "";
+                });
+                suggestBox.appendChild(li);
+                });
+
+                if (results.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "Không tìm thấy sản phẩm.";
+                suggestBox.appendChild(li);
+                }
+            });
+        }, 300); // debounce 300ms
+        });
+
+        // Click ra ngoài để đóng gợi ý
+        document.addEventListener("click", (e) => {
+        if (!e.target.closest(".search-wrapper")) {
+            suggestBox.innerHTML = "";
+        }
+        });
+
+
+        //render
+        let allProducts = [];
+
+        fetch('https://dummyjson.com/products?limit=50')
+        .then(res => res.json())
+        .then(data => {
+        const products = data.products;
+        const listContainer = document.getElementById("product-list");
+
+        document.getElementById("searchInput").addEventListener("input", (e) => {
+            const keyword = e.target.value.toLowerCase();
+            const filtered = allProducts.filter(p =>
+              p.title.toLowerCase().includes(keyword)
+            );
+            renderProducts(filtered);
+        });
+
+        products.forEach((product) => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            card.innerHTML = `
+            <img src="${product.thumbnail}" alt="${product.title}">
+            <h3>${product.title}</h3>
+            <p class="category">${product.category}</p>
+            <p class="price">${product.price.toLocaleString()}₫</p>
+            <button>Mua ngay</button>
+            `;
+
+            card.querySelector("button").addEventListener("click", () => {
+            addToCart(product);
+            });
+
+            listContainer.appendChild(card);
+        });
+        });
+
+    function addToCart(product) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        window.location.href = "cart.html";
+    }
     </script>
-
-    <h1>Các Sản Phẩm Của Chúng Tôi</h1>
-    <p>Đây là các sản phẩm của chúng tôi:</p>
-    <!-- Danh sách sản phẩm -->
-    <!-- Products Section -->
-    <section id="products" class="products">
-        <h2>Sản phẩm</h2>
-        <div class="products-grid">
-        <!-- Products will be loaded dynamically -->
-        </div>
-    </section>
-
     <script src="script.js"></script>
 </body>
 </html>
