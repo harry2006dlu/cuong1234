@@ -24,16 +24,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="products.html" class="nav-link">
-                        <i class="fas fa-box"></i>
-                        <span> Sản Phẩm </span>
-                    </a>
-                </li>
-                <li class="nav-item" id="cart-icon">
-                    <a href="cart.html" class="nav-link">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span> Giỏ Hàng </span>
-                    </a>
+                  <a href="products.html" class="nav-link">
+                      <i class="fas fa-box"></i>
+                      <span> Sản Phẩm </span>
+                  </a>
                 </li>
                 <li class="nav-item">
                     <a href="about.html" class="nav-link">
@@ -58,7 +52,7 @@
         </nav>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section 
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Fresh & Natural Mojitos</h1>
@@ -66,6 +60,98 @@
             <a href="#products" class="cta-button">Mua Sắm</a>
         </div>
     </section>
+    -->
+    <section class="slider">
+        <div class="slides-container" id="slides">
+          <!-- Slides sẽ được render ở đây -->
+        </div>
+        <button class="prev" onclick="changeSlide(-1)">❮</button>
+        <button class="next" onclick="changeSlide(1)">❯</button>
+    </section>
+    
+    <h1>Sản phẩm nổi bật</h1>
+    <div id="homepage-products" style="display: flex; flex-wrap: wrap;"></div>
+
+    <style>
+        body {
+          margin: 0;
+          font-family: 'Segoe UI', sans-serif;
+          background: #f0f2f5;
+        }
+    
+        .stats-bar {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          background: #fff;
+          padding: 30px 10px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          flex-wrap: wrap;
+        }
+    
+        .stat-item {
+          flex: 1 1 220px;
+          text-align: center;
+          padding: 20px 10px;
+          transition: transform 0.3s ease;
+        }
+    
+        .stat-item:hover {
+          transform: translateY(-5px);
+        }
+    
+        .stat-icon {
+          font-size: 36px;
+          color: #3498db;
+          margin-bottom: 10px;
+        }
+    
+        .stat-number {
+          font-size: 2em;
+          font-weight: bold;
+          color: #2d3436;
+        }
+    
+        .stat-label {
+          font-size: 1em;
+          color: #636e72;
+          margin-top: 5px;
+        }
+    
+        @media (max-width: 768px) {
+          .stats-bar {
+            flex-direction: column;
+          }
+        }
+      </style>
+    </head>
+    <body>
+    
+      <section class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-eye"></i></div>
+          <div class="stat-number" data-target="12384">0</div>
+          <div class="stat-label">Lượt truy cập hôm nay</div>
+        </div>
+    
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+          <div class="stat-number" data-target="3289">0</div>
+          <div class="stat-label">Đơn hàng đã xử lý</div>
+        </div>
+    
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-heart"></i></div>
+          <div class="stat-number" data-target="9476">0</div>
+          <div class="stat-label">Khách hàng hài lòng</div>
+        </div>
+    
+        <div class="stat-item">
+          <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="stat-number" data-target="18.4" data-decimal="true">0</div>
+          <div class="stat-label">Tăng trưởng tháng này (%)</div>
+        </div>
+      </section>
     
     <!-- Contact Section -->
     <section id="contact" class="contact">

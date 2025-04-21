@@ -66,8 +66,8 @@
                 <button id="searchBtn" aria-label="Tìm kiếm">
                     <i class="fas fa-search"></i>
                 </button>
+                <ul id="suggestionList" class="suggestions"></ul>
             </div>
-            <ul id="suggestionList" class="suggestions"></ul>
         </div>
     </main>
 
@@ -94,7 +94,7 @@ body {
 }
   .suggestions {
     position: absolute;
-    top: calc(100% + 4px); /* nằm ngay dưới ô search, cách ra 4px */
+    top: calc(100% + 0.2px); /* nằm ngay dưới ô search, cách ra 4px */
     left: 0;
     width: 100%;
     background: white;
@@ -106,7 +106,7 @@ body {
     z-index: 1;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   }
-  
+
   .suggestions li {
     padding: 10px 14px;
     cursor: pointer;
@@ -221,7 +221,7 @@ main {
     }
     .search-wrapper {
         position: relative;
-        width: 100%;
+        width: 1000px;
         max-width: 500px;
         margin: 0 auto;
       }
@@ -341,11 +341,11 @@ main {
     }
 }
 
-
     .product-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 16px;
     }
 
     .page-content {
@@ -511,14 +511,13 @@ main {
         document.addEventListener("click", (e) => {
         if (!e.target.closest(".search-wrapper")) {
             suggestBox.innerHTML = "";
-        }
+            }
         });
-
-
+        
         //render
         let allProducts = [];
 
-        fetch('https://dummyjson.com/products?limit=50')
+        fetch('https://dummyjson.com/products?limit=100')
         .then(res => res.json())
         .then(data => {
         const products = data.products;

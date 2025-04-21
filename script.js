@@ -1,36 +1,49 @@
-// Product Data
-const products = [
+// slider.js
+
+const slidesData = [
     {
         id: 1,
-        name: "Classic ",
-        price: 12.99,
-        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        description: "Traditional Cuban with fresh mint"
+        image: "Screen Shot 2025-04-19 at 22.28.55.png",
+        title: "Khuyến mãi siêu to!",
     },
     {
         id: 2,
-        name: "Strawberry ",
-        price: 14.99,
-        image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        description: "Sweet strawberry flavor with mint"
+        image: "Screen Shot 2025-04-19 at 22.23.37.png",
+        title: "Mua 1 tặng 1 toàn shop",
     },
     {
         id: 3,
-        name: "Coconut ",
-        price: 13.99,
-        image: "https://images.unsplash.com/photo-1587223075055-82e9a937ddff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        description: "Tropical coconut with fresh lime"
-    },
-    {
-        id: 4,
-        name: "Passion Fruit",
-        price: 15.99,
-        image: "https://images.unsplash.com/photo-1546171753-97d7676e4602?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-        description: "Exotic passion fruit blend"
+        image: "Screen Shot 2025-04-19 at 22.24.04.png",
+        title: "Freeship toàn quốc đơn từ 0đ!",
     }
-];
-
-// Tiktok shop api
+  ];
+  
+  let currentIndex = 0;
+  const slidesEl = document.getElementById("slides");
+  
+  function renderSlides() {
+    slidesEl.innerHTML = slidesData.map(item => `
+        <img src="${item.image}" alt="${item.title}">
+    `).join("");
+  }
+  
+  function changeSlide(direction) {
+    currentIndex += direction;
+  
+    if (currentIndex < 0) currentIndex = slidesData.length - 1;
+    if (currentIndex >= slidesData.length) currentIndex = 0;
+  
+    slidesEl.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+  
+  // Tự động chuyển slide mỗi 5s
+  setInterval(() => changeSlide(1), 5000);
+  
+  // Init
+  document.addEventListener("DOMContentLoaded", () => {
+    renderSlides();
+  });
+  
 
 // DOM Elements
 const productsGrid = document.querySelector('.products-grid');
@@ -51,65 +64,113 @@ const aboutPage= document.getElementById('about-page');
 let cart = [];
 
 // Display Products
-function displayProducts() {
-    productsGrid.innerHTML = products.map(product => `
-        <div class="product-card">
-            <img src="${product.image}" alt="${product.name}" class="product-image">
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <p class="price">$${product.price}</p>
-                <button onclick="addToCart(${product.id})" class="add-to-cart-btn">
-                    Add to Cart
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
+  // ===== PHẦN ƯU TIÊN: Load sản phẩm trước =====
+  
+  const API_URL = 'https://dummyjson.com/products';
+  const NUM_PRODUCTS_TO_SHOW = 40;
+  const CONTAINER_ID = 'homepage-products';
+  let statsStarted = false; // đảm bảo chỉ chạy 1 lần
 
-// Cart Functions
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingItem = cart.find(item => item.id === productId);
+  // Load sản phẩm trước
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      const container = document.getElementById(CONTAINER_ID);
 
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({
-            ...product,
-            quantity: 1
+      data.products.slice(0, NUM_PRODUCTS_TO_SHOW).forEach(product => {
+        const item = document.createElement('div');
+        item.className = 'product';
+        item.innerHTML = `
+          <img src="${product.thumbnail}" alt="${product.title}">
+          <h3>${product.title}</h3>
+          <p>${product.price} USD</p>
+        `;
+        container.appendChild(item);
+      });
+
+      // Sau khi render sản phẩm xong, kích hoạt observer
+      observeStatsSection();
+    });
+
+    function initStatsCounter() {
+        const counters = document.querySelectorAll('.stat-number');
+      
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target'));
+          const isDecimal = counter.hasAttribute('data-decimal');
+      
+          let current = 0;
+          const step = target / 100;
+          
+          function updateCount() {
+            current += step;
+      
+            if (current < target) {
+              counter.innerText = isDecimal
+                ? current.toFixed(1)
+                : Math.floor(current);
+      
+              requestAnimationFrame(updateCount);
+            } else {
+              counter.innerText = isDecimal
+                ? target.toFixed(1)
+                : target;
+            }
+          }
+      
+          updateCount();
         });
-    }
+      }
+      
 
-    updateCart();
-    showNotification(`Added ${product.name} to cart!`);
-}
+  // Observer sẽ gọi hàm này khi user cuộn tới stats-bar
+  function observeStatsSection() {
+    const statsSection = document.querySelector('.stats-bar');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !statsStarted) {
+          statsStarted = true; // chỉ chạy 1 lần
+          initStatsCounter();
+        }
+      });
+    }, ); // 50% hiển thị mới kích hoạt
+    
+    observer.observe(statsSection);
+  }
 
-function updateCart() {
-  // Update cart count
-    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-    cartCount.textContent = totalItems;
 
-  // Update cart items display
-    cartItems.innerHTML = cart.map(item => `
-        <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-            <div class="cart-item-details">
-                <h4>${item.name}</h4>
-                <p>$${item.price} x ${item.quantity}</p>
-            </div>
-            <div class="cart-item-controls">
-                <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
-                <span>${item.quantity}</span>
-                <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
-                <button onclick="removeFromCart(${item.id})" class="remove-btn">&times;</button>
-            </div>
-        </div>
-    `).join('');
+  // Hàm chạy animation đếm số
+  function initStatsCounter() {
+    const counters = document.querySelectorAll('.stat-number');
 
-  // Update total
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.textContent = total.toFixed(2);
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const isDecimal = counter.hasAttribute('data-decimal');
+      let current = 0;
+      const step = target / 100;
+
+      const updateCount = () => {
+        current += step;
+        if (current < target) {
+          counter.innerText = isDecimal ? current.toFixed(1) : Math.floor(current);
+          counter.classList.add('bounce');
+          setTimeout(() => counter.classList.remove('bounce'), 500); // reset lại class để tái dùng
+
+          // 👇 Thêm hiệu ứng mỗi lần số thay đổi
+          requestAnimationFrame(updateCount);
+        } else {
+          counter.innerText = isDecimal ? target.toFixed(1) : target;
+          counter.classList.add('bounce');
+          setTimeout(() => counter.classList.remove('bounce'), 500); // reset lại class để tái dùng
+
+
+        }
+      };
+
+      updateCount();
+    });
+  }
+
 
   // Save cart to localStorage
     try {
@@ -117,42 +178,7 @@ function updateCart() {
     } catch (error) {
         console.error("Error saving cart to localStorage", error);
     }
-}
 
-function updateQuantity(productId, newQuantity) {
-    if (newQuantity < 1) {
-        removeFromCart(productId);
-        return;
-    }
-
-    const cartItem = cart.find(item => item.id === productId);
-    if (cartItem) {
-        cartItem.quantity = newQuantity;
-        updateCart();
-    }
-}
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    updateCart();
-    showNotification('Item removed from cart!');
-}
-
-// Cart Modal
-document.querySelector('.cart-icon')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    cartModal.style.display = 'block';
-});
-
-closeCart.addEventListener('click', () => {
-    cartModal.style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-    if (e.target === cartModal) {
-        cartModal.style.display = 'none';
-    }
-});
 
 // Mobile Navigation (toggle navbar khi click vào burger)
 document.addEventListener("DOMContentLoaded", function () {
@@ -236,32 +262,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
         }
     });
-});
-
-// Load cart from localStorage
-window.addEventListener('load', () => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-        cart = JSON.parse(savedCart);
-        updateCart();
-    }
-    displayProducts();
-});
-
-// Checkout Function
-checkoutBtn?.addEventListener('click', () => {
-    if (cart.length === 0) {
-        showNotification('Your cart is empty!');
-        return;
-    }
-
-    showNotification('Proceeding to checkout...');
-    setTimeout(() => {
-        cart = [];
-        updateCart();
-        cartModal.style.display = 'none';
-        showNotification('Thank you for your purchase!');
-    }, 2000);
 });
 
 // Add some additional styles dynamically
