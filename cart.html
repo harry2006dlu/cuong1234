@@ -33,6 +33,7 @@
                     <a href="cart.html" class="nav-link">
                         <i class="fas fa-shopping-cart"></i>
                         <span> Giỏ Hàng </span>
+                        <span class="cart-count">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -41,13 +42,8 @@
                         <span> Về Chúng Tôi </span>
                     </a>
                 </li>
-                <li>
-                    <a href="#cart" class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
-                    </a>
-                </li>
             </ul>
+
             <div class="burger-container">   
                 <div class="burger">
                     <div class="line1"></div>
@@ -58,227 +54,433 @@
         </nav>
     </div>
 
-    <main>
-        <section>
-            <h1>Giỏ Hàng</h1>
-            <div id="cart-container"></div>
-                <!-- Các sản phẩm sẽ được hiển thị ở đây thông qua JavaScript -->
-            <div id="cart-container">
-                <div id="cart-container">
-                    <ul id="cart-items"></ul>
-                    <p id="cart-total">Tổng tiền: 0đ</p>
-                    <button id="checkoutBtn">Thanh toán với MoMo</button>
-                </div>
-            </div>
-                
-    </main>
+    <div id = "main-content">
+        <h1> Giỏ Hàng Của Bạn</h1>
+        <ul id="cart-items" class="cart-list"></ul>
+        <div class="total">
+            <span class="label">Thanh toán:</span>
+            <span id="cart-total">0 đ</span>
+        </div>
+
+        <div class="checkout-section">
+            <button id="momo-pay-btn" class="checkout-btn">
+                <img src="https://developers.momo.vn/v3/vi/docs/sdk/payment/web/images/btn_payment_with_momo.png" alt="Pay with MoMo">
+            </button>
+        </div>
+    </div>
 
     <style>
         /* Cài đặt cho toàn bộ trang */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    padding: 40px;
-    background-color: #f5f5f5;
-  }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f5f5f5;
+        }
 
-  main {
-    padding-top: 80px; /* Đẩy nội dung xuống dưới thanh navbar */
-  }
+        h1 {
+            text-align: center;
+        }
 
-/* Navigation */
-.container {
-    position: fixed;  /* Giữ navbar ở vị trí cố định */
-    top: 0;           /* Đặt navbar ở vị trí trên cùng */
-    left: 0;          /* Đảm bảo navbar căn lề trái */
-    width: 100%;      /* Navbar chiếm toàn bộ chiều rộng màn hình */
-    z-index: 1000;    /* Đảm bảo navbar luôn hiển thị trên các phần tử khác */                     /* Chiều rộng của container = 100% chiều rộng màn hình */
-}
+        ul#cart-items {
+            list-style: none;
+            padding: 0;
+        }
 
-.navbar {
-    display: flex;
-    justify-content: space-between; /* Căn giữa navbar */
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
+        li.cart-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
 
-.logo h1 {
-    color: #fff;
-    font-size: 24px;
-    font-weight: bold;
-     /* margin-right: auto; Đảm bảo logo luôn ở bên trái */
-}
+        li img {
+            width: 100px;
+            height: auto;
+        }
 
-.nav-linksz {
-    display: flex;
-    justify-content: center; /* Căn giữa các mục trong navbar */
-    gap: 30px;
-    list-style: none;
-}
+        .item-info {
+            flex: 1;
+        }
+        /* General container and layout */
+        #main-content {
+            width: 80%;
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+        }
 
-.nav-item {
-    margin: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        #main-content h1 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
 
-.nav-link {
-    text-decoration: none;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /*font-size: 1rem;
-    padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;*/
-}
+        /* Cart item list styles */
+        .cart-list {
+            list-style-type: none;
+            padding: 0;
+        }
 
-.nav-link i {
-    font-size: 24px; /* Kích thước icon */
-    margin-bottom: 5px; /* Khoảng cách giữa icon và văn bản */
-}
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+        }
 
-.nav-link span {
-    display: block;
-}
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-right: 15px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        
+        #cart-icon {
+            position: relative;
+        }        
+
+        .item-info {
+            flex-grow: 1;
+        }
+
+        .item-info h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+
+        .item-info .price {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .item-total {
+            font-size: 1rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Quantity controls */
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        
+
+        .quantity-controls input {
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: green;
+            cursor: pointer;
+            width: 50px;
+            text-align: center;
+        }
+
+        /* Remove item button */
+        .remove-btn {
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .remove-btn:hover {
+            background-color: #e04343;
+        }
+
+        /* Total section */
+        .total {
+            margin-top: 30px;
+            font-size: 1.5rem;
+        }
+
+        .cart-total {
+            font-weight: bold;
+        }
+
+        /* Empty cart message */
+        .empty {
+            text-align: center;
+            color: #888;
+            font-size: 1.2rem;
+            padding: 30px;
+            font-style: italic;
+        }
+
+        
+    /* Navigation */
+        .container {
+            position: fixed;  /* Giữ navbar ở vị trí cố định */
+            top: 0;           /* Đặt navbar ở vị trí trên cùng */
+            left: 0;          /* Đảm bảo navbar căn lề trái */
+            width: 100%;      /* Navbar chiếm toàn bộ chiều rộng màn hình */
+            z-index: 1000;    /* Đảm bảo navbar luôn hiển thị trên các phần tử khác */                     /* Chiều rộng của container = 100% chiều rộng màn hình */
+        }
+    
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Căn giữa navbar */
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .logo h1 {
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            /* margin-right: auto; Đảm bảo logo luôn ở bên trái */
+        }
+
+        .nav-linksz {
+            display: flex;
+            justify-content: center; /* Căn giữa các mục trong navbar */
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /*font-size: 1rem;
+            padding: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;*/
+        }
+
+        .nav-link i {
+            font-size: 24px; /* Kích thước icon */
+            margin-bottom: 5px; /* Khoảng cách giữa icon và văn bản */
+        }
+
+        .nav-link span {
+            display: block;
+        }
     
 
-/* Hiệu ứng hover */
-.nav-link:hover {
-    color: #27ae60; /* Màu xanh lá khi hover */
-    background-color: #222; /* Nền đen khi hover */
-    border-radius: 5px;
-}
+        /* Hiệu ứng hover */
+        .nav-link:hover {
+            color: #27ae60; /* Màu xanh lá khi hover */
+            background-color: #222; /* Nền đen khi hover */
+            border-radius: 5px;
+        }
 
-.cart-container {
-    max-width: 1000px;
-    margin: 30px auto;
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 0 10px #ccc;
-  }
-  
-  .cart-container h2 {
-    margin-bottom: 20px;
-  }
-  
-  .cart-item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding: 15px 0;
-  }
-  
-  .cart-item input[type="checkbox"] {
-    margin-right: 15px;
-  }
-  
-  .cart-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 15px;
-    border-radius: 6px;
-  }
-  
-  .item-info {
-    flex: 1;
-  }
-  
-  .item-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .item-price {
-    color: #ee4d2d;
-    font-weight: bold;
-  }
-  
-  .quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 8px;
-  }
-  
-  .quantity button {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #ccc;
-    background: white;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .quantity input {
-    width: 40px;
-    text-align: center;
-    border: none;
-    background: #f9f9f9;
-  }
-  
-  .remove-btn {
-    color: red;
-    margin-left: 15px;
-    cursor: pointer;
-  }
-  
-  .cart-footer {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
-  }
-  
-  .total {
-    font-size: 18px;
-    font-weight: bold;
-  }
-  
-  .checkout-btn {
-    background: #ee4d2d;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    font-weight: bold;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .checkout-btn:hover {
-    background: #d7421b;
-  }
-  
-  /* Responsive */
-  @media screen and (max-width: 600px) {
-    .cart-item {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .cart-item img {
-      margin-bottom: 10px;
-    }
-  
-    .cart-footer {
-      flex-direction: column;
-      gap: 15px;
-      align-items: flex-start;
-    }
-  }
+        /* PAYMENT */
 
+        .checkout-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: right;
+        }
+        
+        .checkout-btn {
+            background: #af1f63;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkout-btn:hover {
+            background: #8c1a52;
+        }
+        
+        .checkout-btn img {
+            height: 24px;
+        }
+
+        /* Burger menu */
+
+        
+  /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-linksz {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+
+            background: #333;
+            flex-direction: column;
+            display: none;
+            gap: 20px;
+            padding: 20px 0;
+            }
+  
+            .nav-linksz.active {
+            display: flex;
+            }
+    
+            .burger {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 25px;
+                height: 18px;
+                cursor: pointer;
+            }
+
+            .burger div {
+                height: 3px;
+                background-color: white;
+                border-radius: 3px;
+            }
+        }
+
+
+        .cart-list {
+            max-width: 1000px;
+            margin: 30px auto;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px #ccc;
+        }
+        
+        .cart-list h2 {
+            margin-bottom: 20px;
+        }
+  
+        .item-info {
+            flex: 1;
+        }
+        
+        .item-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+  
+        .item-price {
+            color: #ee4d2d;
+            font-weight: bold;
+        }
+        
+        /*
+            .quantity {
+                display: flex;
+                align-items: center;
+                margin-top: 8px;
+            }
+  
+        
+            .quantity button {
+                width: 30px;
+                height: 30px;
+                border: 1px solid #ccc;
+                background: white;
+                font-size: 16px;
+                cursor: pointer;
+            }
+  
+            .quantity input { 
+            width: 40px;
+            text-align: center;
+            border: none;
+            background: red;
+            }
+        */
+  
+        .cart-footer {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 20px;
+        }
+  
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            .cart-item {
+            flex-direction: column;
+            align-items: flex-start;
+            }
+  
+            .cart-item img {
+            margin-bottom: 10px;
+            }
+  
+            .cart-footer {
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+            }
+        }
+
+        /* Ẩn mũi tên tăng/giảm mặc định trong input number */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        input[type="number"] {
+        -moz-appearance: textfield; /* Firefox */
+        }
     </style>
 
     <script>
@@ -294,154 +496,237 @@ body {
             });
         });
 
-        const burger = document.querySelector('.burger-container');
-    const navLinks = document.querySelector('.nav-linksz');
+        // MOMO Payment Integration
+        document.getElementById('momo-pay-btn').addEventListener('click', function() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            
+            if (cart.length === 0) {
+                alert("Giỏ hàng của bạn đang trống!");
+                return;
+            }
 
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+            // Calculate total amount
+            const totalAmount = cart.reduce((sum, item) => {
+                return sum + (item.price * (item.quantity || 1));
+            }, 0);
 
-        document.addEventListener("DOMContentLoaded", function () {
-            // Lấy tất cả các phần tử burger (menu) và navbar trên trang
-            const burgers = document.querySelectorAll(".burger");  // Lấy tất cả các burger
-            const navbars = document.querySelectorAll(".navbar");  // Lấy tất cả các navbar
-            const productsPage= document.getElementById('products-page');
-            const cartPage= document.getElementById('cart-page');
-            const aboutPage= document.getElementById('about-page');
+            // Create order info
+            const orderInfo = `Thanh toán đơn hàng từ Mojito - ${cart.length} sản phẩm`;
+            const orderId = `MOJITO-${Date.now()}`;
         
-            // Duyệt qua tất cả các burger và navbar
-            burgers.forEach((burger, index) => {
-                burger.addEventListener("click", function () {
-                    // Lấy navbar và nav-links tương ứng với burger đang được click
-                    const navbar = navbars[index];
-                    const navLinks = navbar.querySelector(".nav-links");
-                    const navLinkss = navbar.querySelector(".nav-linkss");
-                    const navLinksz = navbar.querySelector(".nav-linksz");
-                    const navLinkszz = navbar.querySelector(".nav-linkszz");
-        
-                    // Thêm hoặc bỏ class 'active' cho navbar và nav-links
-                    navbar.classList.toggle("active");
-                    if (navLinks) {
-                        navLinks.classList.toggle("active");
-                    }
-                    navbar.classLists.toggle("active");
-                    if (navLinkss) {
-                        navLinkss.classLists.toggle("active");
-                    }
-                    
-                    if (navLinksz) {
-                        navLinksz.classListz.toggle("active");
-                    }
-                    if (navLinkszz) {
-                        navLinkszz.classListzz.toggle("active");
-                    }
-        
-                    // Thêm hoặc bỏ class 'toggle' cho burger để thay đổi hình dạng
-                    burger.classList.toggle("toggle");
-                    burger.classLists.toggle("toggle");
-                    burger.classListz.toggle("toggle");
-                    burger.classListzz.toggle("toggle");
-                });
-            });
-        });
-
-        // Lấy giỏ hàng từ localStorage
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const container = document.getElementById("cart-container");
-
-    // Render giỏ hàng từ localStorage
-    function renderCart() {
-        const list = document.getElementById("cart-items");
-        const total = document.getElementById("cart-total");
-        list.innerHTML = "";
-
-        if (cart.length === 0) {
-            container.innerHTML = "<p>Giỏ hàng trống.</p>";
-            total.textContent = "0 đ";
-            return;
-    }
-
-    let sum = 0;
-    cart.forEach(item => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-            <img src="${item.thumbnail}" alt="${item.title}" width="100">
-            <div>
-                <h3>${item.title}</h3>
-                <p>${item.price.toLocaleString()}₫</p>
-                <button onclick="changeQuantity(${item.id}, 'decrease')">-</button>
-                ${item.quantity}
-                <button onclick="changeQuantity(${item.id}, 'increase')">+</button>
-                <p>- Tổng: ${item.price * item.quantity} đ</p>
-                <button class="remove-btn" data-id="${item.id}">❌ Xoá</button>
-            </div>
-        `;
-        list.appendChild(li);
-        sum += item.price * item.quantity;
-    });
-
-    total.textContent = sum.toLocaleString() + " đ";
-
-    // Gắn sự kiện xóa cho các nút
-    document.querySelectorAll(".remove-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            const id = parseInt(btn.getAttribute("data-id"));
-            removeFromCart(id);
-        });
-    });
-}
-
-// Hàm thay đổi số lượng sản phẩm
-    function changeQuantity(id, action) {
-    const item = cart.find(product => product.id === id);
-        if (!item) return;
-        
-        if (action === "increase") {
-            item.quantity += 1;
-        } else if (action === "decrease" && item.quantity > 1) {
-            item.quantity -= 1;
-    }
+            // For testing - replace with your actual MOMO integration
+            console.log("Initiating MOMO payment:");
+            console.log("Order ID:", orderId);
+            console.log("Amount:", totalAmount);
+            console.log("Items:", cart);
     
-    // Lưu giỏ hàng vào localStorage sau khi thay đổi
-    localStorage.setItem("cart", JSON.stringify(cart));
-    renderCart();
-    }
+            // In a real implementation, you would call the MOMO API here
+            // This is just a simulation
+            simulateMomoPayment(totalAmount, orderId, orderInfo);
+        });
 
-    // Hàm thêm sản phẩm vào giỏ
-    function addToCart(product) {
-        const exist = cart.find(item => item.id === product.id);
-        if (exist) {
-            exist.quantity += 1;
-        } else {
-            cart.push({ ...product, quantity: 1 });
+        function simulateMomoPayment(amount, orderId, description) {
+            // This is just for demonstration
+            // In a real app, you would use the MOMO SDK or API
+    
+            const momoUrl = `https://payment.momo.vn/v2/gateway/api/create?amount=${amount}&orderId=${orderId}&description=${encodeURIComponent(description)}`;
+            
+            // Show confirmation dialog
+            const proceed = confirm(`Bạn sẽ được chuyển đến cổng thanh toán MOMO\n\nSố tiền: ${amount.toLocaleString()}₫\nMã đơn hàng: ${orderId}\n\nTiếp tục?`);
+            
+            if (proceed) {
+                // In a real implementation, redirect to MOMO payment page
+                // window.location.href = momoUrl;
+                
+                // For demo purposes, just show success after delay
+                setTimeout(() => {
+                    alert("Thanh toán thành công qua MOMO!\n\nĐơn hàng của bạn đang được xử lý.");
+                    
+                    // Clear cart after successful payment
+                    localStorage.removeItem("cart");
+                    updateCartCount();
+                    renderCart();
+                }, 2000);
+            }
         }
 
-        // Lưu giỏ hàng vào localStorage sau khi thay đổi
-        localStorage.setItem("cart", JSON.stringify(cart));
-        renderCart();
-    }
+        document.addEventListener("DOMContentLoaded", () => {
+            const burger = document.querySelector(".burger");
+            const navLinks = document.querySelector(".nav-linksz");
+          
+            if (burger && navLinks) {
+                burger.addEventListener("click", () => {
+                    navLinks.classList.toggle("active");
+                });
+            }
+              /*  
+            */
 
-    // Hàm xoá sản phẩm khỏi giỏ hàng
-    function removeFromCart(id) {
-        cart = cart.filter(item => item.id !== id);
-        // Lưu giỏ hàng vào localStorage sau khi thay đổi
-        localStorage.setItem("cart", JSON.stringify(cart));
-        renderCart();
-    }
+            // Render the cart after the DOM is loaded
+            
+          
+            console.log("Cart data:", JSON.parse(localStorage.getItem("cart")));
 
-    // Hàm tính tổng tiền
-    function getTotal() {
-        return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    }
+            // Render cart with quantity controls
+            function renderCart() {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const cartList = document.getElementById("cart-items");
+                const cartTotal = document.getElementById("cart-total");
 
-    // Hiển thị giỏ hàng khi tải trang
-    window.onload = () => {
-        renderCart(); // Gọi hàm renderCart khi trang tải
-    };
+                cartList.innerHTML = '';
 
+                if (cart.length === 0) {
+                    cartList.innerHTML = '<li class="empty">Giỏ hàng đang trống</li>';
+                    cartTotal.textContent = '0';
+                    return;
+                }
+
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * (item.quantity || 1);
+                    total += itemTotal;
+                    
+                    const li = document.createElement('li');
+                    li.className = 'cart-item';
+                    li.innerHTML = `
+                        <img src="${item.thumbnail}" alt="${item.title}">
+                        <div class="item-info">
+                            <h3>${item.title}</h3>
+                            <p class="price">Đơn giá: ${item.price.toLocaleString()}₫</p>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity || 1}" min="1" data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                            <button class="remove-btn" data-id="${item.id}">Xóa</button>
+                            <p class="item-total">Tổng: ${itemTotal.toLocaleString()}₫</p>
+                        </div>
+                    `;
+                    cartList.appendChild(li);
+                });
+
+                cartTotal.textContent = total.toLocaleString();
+                
+                // Add event listeners to all controls
+                addCartEventListeners();
+            }
+
+            // Add event listeners to quantity controls and delete buttons
+            function addCartEventListeners() {
+                // Quantity minus buttons
+                document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        updateQuantity(id, -1);
+                    });
+                });
+                
+                // Quantity plus buttons
+                document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        updateQuantity(id, 1);
+                    });
+                });
+                
+                // Quantity input changes
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', function() {
+                        const id = this.getAttribute('data-id');
+                        const newQuantity = parseInt(this.value);
+                        if (newQuantity > 0) {
+                            setQuantity(id, newQuantity);
+                        } else {
+                            this.value = 1;
+                        }
+                    });
+                });
+                
+                // Remove buttons
+                document.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        removeItem(id);
+                    });
+                });
+                
+                // Clear cart button
+                document.getElementById('clear-cart')?.addEventListener('click', clearCart);
+            }
+
+            // Update quantity (add/subtract)
+            function updateQuantity(id, change) {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const item = cart.find(item => item.id == id);
+                
+                if (item) {
+                    item.quantity = (item.quantity || 1) + change;
+                    
+                    // Ensure quantity doesn't go below 1
+                    if (item.quantity < 1) item.quantity = 1;
+                    
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                    updateCartCount();
+                }
+            }
+
+            // Set specific quantity
+            function setQuantity(id, quantity) {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const item = cart.find(item => item.id == id);
+                
+                if (item) {
+                    item.quantity = quantity;
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    renderCart();
+                    updateCartCount();
+                }
+            }
+
+            // Remove item completely
+            function removeItem(id) {
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart = cart.filter(item => item.id != id);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
+                updateCartCount();
+                
+                // Optional: Show confirmation
+                alert('Đã xóa sản phẩm khỏi giỏ hàng');
+            }
+
+            // Clear entire cart
+            function clearCart() {
+                if (confirm('Bạn có chắc chắn muốn xóa toàn bộ giỏ hàng?')) {
+                    localStorage.removeItem("cart");
+                    renderCart();
+                    updateCartCount();
+                    alert('Đã xóa toàn bộ giỏ hàng');
+                }
+            }
+
+            // Update cart count in header
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                document.querySelectorAll('.cart-count').forEach(el => {
+                    el.textContent = totalItems;
+                });
+            }
+
+            // Initialize cart when page loads
+            renderCart();  
+
+            // Initialize cart when page loads
+        
+        // Render the cart after the DOM is loaded
+        //window.addEventListener("DOMContentLoaded", renderCart);
+        
+        });
     </script>
 
-
-    <script src="script.js"></script> <!-- Liên kết đến JavaScript -->
-</body>
+    <!--<script src="script.js"></script> Liên kết đến JavaScript -->
+    </body>
 </html>

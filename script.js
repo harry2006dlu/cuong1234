@@ -60,6 +60,19 @@ const productsPage= document.getElementById('products-page');
 const cartPage= document.getElementById('cart-page');
 const aboutPage= document.getElementById('about-page');
 
+// Update cart count
+document.addEventListener("DOMContentLoaded", function () {
+  function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      document.querySelectorAll('.cart-count').forEach(el => {
+          el.textContent = totalItems;
+      });
+  }
+
+  updateCartCount();
+});
+
 // Cart Array
 let cart = [];
 

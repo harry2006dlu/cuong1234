@@ -34,18 +34,13 @@
                     <a href="cart.html" class="nav-link">
                         <i class="fas fa-shopping-cart"></i>
                         <span> Giỏ Hàng </span>
+                        <span class="cart-count">0</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="about.html" class="nav-link">
                         <i class="fas fa-info-circle"></i> 
                         <span> Về Chúng Tôi </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#cart" class="cart-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count">0</span>
                     </a>
                 </li>
             </ul>
@@ -76,26 +71,134 @@
                     <h2>Tầm Nhìn</h2>
                     <p>Chúng tôi mong muốn trở thành một trong những nền tảng hàng đầu trong ngành và tiếp tục đổi mới để mang lại những giá trị bền vững cho cộng đồng.</p>
                 </div>
-            <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Mojito Making">
-            </div>
+                <div class="about-container">
+
+                    <p class="about-text">
+                      Hầu hết mọi người bắt đầu web với một team mạnh mẽ, sử dụng các outsource hiện đại
+                      Tôi đã bắt đầu với một chiếc laptop, ý tưởng điên rồ và rất nhiều cà phê
+                    </p>
+                    <p class="about-text">
+                      Tôi muốn truyền cảm hứng cách mà <span class="highlight">Steve Jobs tạo ra Apple</span> — from a garage, with vision, focus, and a hunger to change things.
+                    </p>
+                    <p class="about-text">
+                      Điều này cũng xảy ra khi tôi làm trang web nhỏ này
+                      Bắt đầu nhỏ — một vài sản phẩm, một niềm đam mê thiết kê, và một niềm tin  
+                      <span class="highlight">Mojito sẽ đem lại trải nghiệm</span> tốt nhất
+                    </p>
+                    <p class="about-text">
+                      Trải nghiệm tốt nhất, hài lòng nhất
+                    </p>
+                    <p class="about-text">
+                      Cảm ơn bạn đã đọc đến đây - hãy trở thành một phần của câu chuyện
+                    </p>
+                
+                    <p class="signature">— [Cương], Founder</p>
+                </div>
         </div>
     </section>
 
     <style>
         /* Cài đặt cho toàn bộ trang */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+          }
+      
+          body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            line-height: 1.6;
+          }
+      
+          .about-container {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+            border-radius: 10px;
+            animation: bounceIn 1s ease-out;
+          }
+      
+          h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #2b2b2b;
+            animation: bounceIn 1s ease-out;
+          }
+      
+          .about-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+          }
+      
+          .about-text:nth-of-type(2) { animation-delay: 0.2s; }
+          .about-text:nth-of-type(3) { animation-delay: 0.4s; }
+          .about-text:nth-of-type(4) { animation-delay: 0.6s; }
+          .about-text:nth-of-type(5) { animation-delay: 0.8s; }
+      
+          .highlight {
+            color: #0077cc;
+            font-weight: bold;
+          }
+      
+          .signature {
+            font-style: italic;
+            margin-top: 40px;
+            text-align: right;
+            font-weight: bold;
+            color: #555;
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 1s;
+            opacity: 0;
+            transform: translateY(30px);
+          }
+      
+          @keyframes bounceIn {
+            0% {
+              transform: scale(0.8);
+              opacity: 0;
+            }
+            60% {
+              transform: scale(1.05);
+              opacity: 1;
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+      
+          @keyframes fadeInUp {
+            0% {
+              opacity: 0;
+              transform: translateY(30px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+      
+          @media (max-width: 600px) {
+            .about-container {
+              padding: 20px;
+              margin: 30px 15px;
+            }
+      
+            h1 {
+              font-size: 28px;
+            }
+      
+            .about-text {
+              font-size: 16px;
+            }
+          }
 
 /* Navigation */
 .container {
@@ -167,20 +270,23 @@ body {
 }
 
 /* Giỏ hàng */
-.cart-icon {
-    position: relative;
-}
-
 .cart-count {
     position: absolute;
     top: -5px;
     right: -10px;
     background-color: red;
     color: white;
-    border-radius: 50%;
-    padding: 5px;
     font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    z-index: 10;
 }
+
+#cart-icon {
+    position: relative;
+}
+
 
 /* Hiển thị burger menu */
 @media (max-width: 768px) {
@@ -354,12 +460,25 @@ body {
             });
         });
 
-        const burger = document.querySelector('.burger-container');
-    const navLinks = document.querySelector('.nav-linksz');
+        //update cart count
+        document.addEventListener("DOMContentLoaded", function () {
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                document.querySelectorAll('.cart-count').forEach(el => {
+                    el.textContent = totalItems;
+                });
+            }
+    
+            updateCartCount();
+        });
 
-    burger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
+        const burger = document.querySelector('.burger-container');
+        const navLinks = document.querySelector('.nav-linksz');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
 
         document.addEventListener("DOMContentLoaded", function () {
             // Lấy tất cả các phần tử burger (menu) và navbar trên trang
@@ -384,17 +503,17 @@ body {
                     if (navLinks) {
                         navLinks.classList.toggle("active");
                     }
-                    navbar.classLists.toggle("active");
-                    if (navLinkss) {
-                        navLinkss.classLists.toggle("active");
-                    }
+                    //navbar.classLists.toggle("active");
+                    //    if (navLinkss) {
+                    //        navLinkss.classLists.toggle("active");
+                    //    }
                     
-                    if (navLinksz) {
-                        navLinksz.classListz.toggle("active");
-                    }
-                    if (navLinkszz) {
-                        navLinkszz.classListzz.toggle("active");
-                    }
+                    //    if (navLinksz) {
+                    //        navLinksz.classListz.toggle("active");
+                    //    }
+                    //    if (navLinkszz) {
+                    //        navLinkszz.classListzz.toggle("active");
+                    //    }
         
                     // Thêm hoặc bỏ class 'toggle' cho burger để thay đổi hình dạng
                     burger.classList.toggle("toggle");
@@ -405,6 +524,15 @@ body {
             });
         });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
+
+
+    
+
+    
+
+
+
+  
+
